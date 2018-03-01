@@ -3,60 +3,60 @@
 "author": "Bram Stoker",
 "name": "Dracula",
 "file": "stories/Bram+Stoker+-+Dracula",
-"week": "One"
+"day": 36
 },
 {
 "author": "Charlotte Perkins",
 "name": "The Yellow Wallpaper",
 "file": "stories/Charlotte+Perkins+Gilman+-+The+Yellow+Wallpaper",
-"week": "One"
+"day": 47
 },
 {
 "author": "Mary Shelley",
 "name": "Frankenstein",
 "file": "stories/Mary+Shelley+-+Frankenstein",
-"week": "One"
+"day": 58
 },
 {
 "author": "Edgar Allan Poe",
 "name": "The Raven",
 "file": "stories/Edgar+Allan+Poe+-+The+Raven",
-"week": "One"
+"day": 69
 },
 {
 "author": "Edgar Allan Poe",
 "name": "The Fall of the House of Usher",
 "file": "stories/Edgar+Allan+Poe+-+The+Fall+of+the+House+of+Usher",
-"week": "One"
+"day": 70
 },
 {
 "author": "Robert William Chambers",
 "name": "The King In Yellow",
 "file": "stories/Robert+William+Chambers+-+The+King+in+Yellow",
-"week": "One"
+"day": 81
 },
 {
 "author": "William Hope Hodgson",
 "name": "The Night Land",
 "file": "stories/William+Hope+Hodgson+-+The+Night+Land",
-"week": "One"
+"day": 92
 },
 {
 "author":"Howard Phillips Lovecraft",
 "name": "The Call of Cthulhu",
 "file": "stories/Howard+Phillips+Lovecraft+-+The+Call+of+Cthulhu",
-"week": "One"
+"day": 103
 },
 {
 "author": "Washington Irving",
 "name": "The Legend of Sleepy Hollow",
 "file": "stories/Washington+Irving+-+The+Legend+of+Sleepy+Hollow",
-"week": "One"
+"day": 114
 },
 {
 "author": "George Svlvester Viereck",
 "name": "The House of the Vampire",
 "file": "George+Sylvester+Viereck+-+The+House+of+the+Vampire",
-"week": "One"
+"day": 125
 }
 ]
