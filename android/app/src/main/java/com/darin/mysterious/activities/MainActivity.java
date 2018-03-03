@@ -7,9 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.darin.mysterious.Mysterious;
 import com.darin.mysterious.R;
+import com.darin.mysterious.adapters.StoryAdapter;
 import com.darin.mysterious.data.StoryData;
 
 import java.util.List;
@@ -21,23 +25,44 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
     private Mysterious mysterious;
     private List<StoryData> stories;
 
+    private Toolbar toolbar;
+    private RecyclerView recycler;
+
+    private StoryAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = findViewById(R.id.toolbar);
+        recycler = findViewById(R.id.recycler);
+
         mysterious = (Mysterious) getApplicationContext();
+        mysterious.addOnLoadListener(this);
+
         stories = mysterious.getStories();
+        adapter = new StoryAdapter(stories);
+        recycler.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mysterious.removeOnLoadListener(this);
     }
 
     @Override
     public void onLoad() {
-
+        stories = mysterious.getStories();
+        adapter = new StoryAdapter(stories);
+        recycler.swapAdapter(adapter, true);
     }
 
     @Override
-    public void onLoad(StoryData story) {
-
+    public void onChange(StoryData story) {
+        adapter.notifyItemChanged(stories.indexOf(story));
     }
 
     @Override

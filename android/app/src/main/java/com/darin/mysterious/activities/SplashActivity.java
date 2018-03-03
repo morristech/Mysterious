@@ -39,12 +39,12 @@ public class SplashActivity extends AppCompatActivity implements Mysterious.OnLo
     }
 
     @Override
-    public void onLoad(StoryData story) {
+    public void onChange(StoryData story) {
     }
 
     @Override
     public void onFailure(int reason) {
-        Toast.makeText(this, "Failed to do something.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Failed to do something: " + reason, Toast.LENGTH_SHORT).show();
         finish();
     }
 }
