@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
     @Override
     public void onFailure(int reason) {
         if (reason == Mysterious.FAILURE_REASON_PERMISSION_STORAGE) {
+            //TODO: show AlertDialog
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
         }
     }
