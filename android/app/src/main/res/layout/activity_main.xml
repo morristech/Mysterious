@@ -9,13 +9,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/app_name">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:animateLayoutChanges="true"
+            app:titleEnabled="false">
 
-        </android.support.v7.widget.Toolbar>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="?actionBarSize"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondaryInverse"
+                    android:layout_weight="1"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/msg_undownloaded_stories" />
+
+                <TextView
+                    android:id="@+id/downloadOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/download"
+                    android:textColor="?android:textColorPrimaryInverse"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textAllCaps="true"
+                    android:padding="8dp"
+                    android:background="?selectableItemBackgroundBorderless" />
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 

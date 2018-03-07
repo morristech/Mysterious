@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Mysterious</string>
+    <string name="msg_undownloaded_stories">There are stories available that you have not downloaded. Would you like to download them now?</string>
+    <string name="later">Later</string>
+    <string name="download">Download</string>
 </resources>
