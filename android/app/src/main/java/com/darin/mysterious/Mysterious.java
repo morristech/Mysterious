@@ -55,7 +55,7 @@ public class Mysterious extends Application {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             for (StoryData story : storiesThread.stories) {
-                if (story.isAvailable()) {
+                if (story.isAvailable() && story.isDownloaded(this)) {
                     stories.add(story);
                 }
             }
