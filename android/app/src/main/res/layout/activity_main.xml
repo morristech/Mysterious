@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,9 +23,9 @@
                 android:layout_marginTop="?actionBarSize"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.darin.mysterious.views.IconView
+                    android:layout_width="126dp"
+                    android:layout_height="126dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:scaleType="fitCenter"
@@ -42,7 +41,7 @@
                     android:textColor="?android:textColorPrimary"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    tools:text="00:00" />
+                    android:text="00:00" />
 
                 <TextView
                     android:layout_width="match_parent"
