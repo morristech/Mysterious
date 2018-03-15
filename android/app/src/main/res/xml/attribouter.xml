@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<about>
+    <appInfo />
+    <contributors repo="DarinMenezes/Mysterious">
+        <contributor
+            login="DarinMenezes"
+            task="Creator / Designer" />
+        <contributor
+            login="TheAndroidMaster"
+            task="Developer" />
+    </contributors>
+    <licenses>
+        <project
+            repo="psiegman/epublib"
+            license="lgpl-3.0" />
+    </licenses>
+</about>

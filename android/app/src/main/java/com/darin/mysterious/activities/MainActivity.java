@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.darin.mysterious.Mysterious;
 import com.darin.mysterious.R;
@@ -17,6 +19,8 @@ import com.darin.mysterious.adapters.StoryAdapter;
 import com.darin.mysterious.data.StoryData;
 
 import java.util.List;
+
+import me.jfenn.attribouter.Attribouter;
 
 public class MainActivity extends AppCompatActivity implements Mysterious.OnLoadListener {
 
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
 
         toolbar = findViewById(R.id.toolbar);
         recycler = findViewById(R.id.recycler);
+
+        setSupportActionBar(toolbar);
 
         mysterious = (Mysterious) getApplicationContext();
         mysterious.addOnLoadListener(this);
@@ -84,5 +90,21 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
 
             mysterious.getStories();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_about) {
+            Attribouter.from(this)
+                    .withFile(R.xml.attribouter)
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
