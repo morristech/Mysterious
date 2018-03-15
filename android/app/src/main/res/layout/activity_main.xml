@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -12,48 +13,91 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:animateLayoutChanges="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary"
             app:titleEnabled="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?actionBarSize"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/ic_launcher_foreground"
+                    android:tint="?android:textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/countdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    tools:text="00:00" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:text="@string/title_next_story_time"
+                    android:textAlignment="center"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/download"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/msg_undownloaded_stories"
+                        android:textColor="?android:textColorSecondaryInverse" />
+
+                    <TextView
+                        android:id="@+id/downloadOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        android:text="@string/download"
+                        android:textAllCaps="true"
+                        android:textColor="?android:textColorPrimaryInverse"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_collapseMode="pin"
                 app:title="@string/app_name" />
-
-            <LinearLayout
-                android:id="@+id/download"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="?actionBarSize"
-                android:background="@color/colorAccent"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:textColorSecondaryInverse"
-                    android:layout_weight="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:text="@string/msg_undownloaded_stories" />
-
-                <TextView
-                    android:id="@+id/downloadOk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/download"
-                    android:textColor="?android:textColorPrimaryInverse"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textAllCaps="true"
-                    android:padding="8dp"
-                    android:background="?selectableItemBackgroundBorderless" />
-
-            </LinearLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -63,9 +107,9 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
         android:clipToPadding="false"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
