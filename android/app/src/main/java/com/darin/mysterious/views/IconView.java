@@ -94,16 +94,16 @@ public class IconView extends View {
         Path outerPath = getScaledPath(this.outerPath, pathSize, canvas.getWidth(), canvas.getHeight());
         Path innerPath = getScaledPath(this.innerPath, pathSize, canvas.getWidth(), canvas.getHeight());
 
-        if (Math.abs(outerDashes[0] - (outerLength * 2)) > outerLength * 0.2) {
-            outerDashes[0] += ((outerLength * 2) - outerDashes[0]) * 0.065;
+        if (Math.abs(outerDashes[0] - (outerLength * 2)) > outerLength * 0.65) {
+            outerDashes[0] += ((outerLength * 2) - outerDashes[0]) * 0.02;
             outerPaint.setPathEffect(new DashPathEffect(outerDashes, 0));
         } else if (outerFillPaint.getAlpha() < 255) {
             outerPaint.setAlpha(0);
             outerFillPaint.setAlpha((int) (outerFillPaint.getAlpha() + ((254 - outerFillPaint.getAlpha()) * 0.15)));
         }
 
-        if (Math.abs(innerDashes[0] - (innerLength * 2)) > innerLength * 0.2) {
-            innerDashes[0] += ((innerLength * 2) - innerDashes[0]) * 0.065;
+        if (Math.abs(innerDashes[0] - (innerLength * 2)) > innerLength * 0.65) {
+            innerDashes[0] += ((innerLength * 2) - innerDashes[0]) * 0.02;
             innerPaint.setPathEffect(new DashPathEffect(innerDashes, 0));
         } else if (innerFillPaint.getAlpha() < 255) {
             innerPaint.setAlpha(0);
