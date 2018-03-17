@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <about>
-    <appInfo />
+    <appInfo repo="DarinMenezes/Mysterious" />
     <contributors repo="DarinMenezes/Mysterious">
         <contributor
             login="DarinMenezes"
+            name="Darin Menezes"
+            avatar="https://avatars2.githubusercontent.com/u/19171858?v=4"
+            blog="http://darinsdesign.ml/"
             task="Creator / Designer" />
         <contributor
             login="TheAndroidMaster"
+            name="James Fenn"
+            avatar="https://avatars1.githubusercontent.com/u/13000407?v=4"
+            bio="Android developer and co-founder of Double Dot Labs. Writes Java, C, and HTML. PHP confuses me."
+            blog="https://jfenn.me/"
+            email="dev@jfenn.me"
             task="Developer" />
     </contributors>
     <licenses>
