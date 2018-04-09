@@ -3,6 +3,7 @@ package com.darin.mysterious.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -12,11 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.darin.mysterious.Mysterious;
 import com.darin.mysterious.R;
 import com.darin.mysterious.adapters.StoryAdapter;
 import com.darin.mysterious.data.StoryData;
+import com.darin.mysterious.utils.FormatUtils;
 
 import java.util.List;
 
@@ -29,8 +33,14 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
     private Mysterious mysterious;
     private List<StoryData> stories;
 
+    private Handler handler;
+    private Runnable runnable;
+
     private Toolbar toolbar;
     private RecyclerView recycler;
+    private TextView countDownView;
+    private View downloadLayout;
+    private View downloadButton;
 
     private StoryAdapter adapter;
 
@@ -41,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
 
         toolbar = findViewById(R.id.toolbar);
         recycler = findViewById(R.id.recycler);
+        countDownView = findViewById(R.id.countdown);
+        downloadLayout = findViewById(R.id.download);
+        downloadButton = findViewById(R.id.downloadOk);
 
         setSupportActionBar(toolbar);
 
@@ -51,12 +64,33 @@ public class MainActivity extends AppCompatActivity implements Mysterious.OnLoad
         adapter = new StoryAdapter(stories);
         recycler.setLayoutManager(new GridLayoutManager(this, 2));
         recycler.setAdapter(adapter);
+
+        downloadLayout.setVisibility(mysterious.getUnDownloadedStories().size() > 0 ? View.VISIBLE : View.GONE);
+        downloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mysterious.downloadStories(mysterious.getUnDownloadedStories());
+                downloadLayout.setVisibility(View.GONE);
+            }
+        });
+
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                countDownView.setText(FormatUtils.formatMillis(mysterious.millisUntilNextStory()));
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.post(runnable);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mysterious.removeOnLoadListener(this);
+        if (handler != null)
+            handler.removeCallbacks(runnable);
     }
 
     @Override

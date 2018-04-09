@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.darin.mysterious.data.StoryData;
 import com.google.gson.JsonObject;
@@ -17,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import nl.siegmann.epublib.epub.EpubReader;
@@ -70,6 +73,44 @@ public class Mysterious extends Application {
         booksThread.start();
 
         return stories;
+    }
+
+    public List<StoryData> getUnDownloadedStories() {
+        List<StoryData> stories = new ArrayList<>();
+
+        for (StoryData story : storiesThread.stories) {
+            if (story.isAvailable() && !story.isDownloaded(this)) {
+                stories.add(story);
+            }
+        }
+
+        return stories;
+    }
+
+    public void downloadStories(List<StoryData> stories) {
+
+    }
+
+    public long millisUntilNextStory() {
+        int index = -1;
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+        for (int i = 0; i < storiesThread.stories.size(); i++) {
+            if (storiesThread.stories.get(i).getDay() > currentDay && !storiesThread.stories.get(i).isAvailable())
+                index = i;
+        }
+
+        if (index < 0) {
+            for (int i = 0; i < storiesThread.stories.size(); i++) {
+                if (!storiesThread.stories.get(i).isAvailable())
+                    index = i;
+            }
+        }
+
+        Log.d("RemainingMillis", index + " - \n" + storiesThread.stories.get(index));
+
+        if (index >= 0)
+            return storiesThread.stories.get(index).getRemainingMillis();
+        else return 0;
     }
 
     public void addOnLoadListener(OnLoadListener listener) {
@@ -136,6 +177,7 @@ public class Mysterious extends Application {
                 return;
             }
 
+            Collections.sort(stories);
             mysterious.onLoad();
             request.disconnect();
         }

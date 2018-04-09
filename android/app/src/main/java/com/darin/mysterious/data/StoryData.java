@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import com.darin.mysterious.Mysterious;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubReader;
 
-public class StoryData {
+public class StoryData implements Comparable<StoryData> {
 
     private String fileName;
     private int dayOfYear;
@@ -56,6 +57,21 @@ public class StoryData {
         return DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
     }
 
+    public int getDay() {
+        return dayOfYear;
+    }
+
+    public long getRemainingMillis() {
+        Calendar now = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+        while (!now.before(calendar)) {
+            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 1);
+        }
+
+        return calendar.getTime().getTime() - System.currentTimeMillis();
+    }
+
     public boolean isLoading() {
         return isLoading;
     }
@@ -91,4 +107,18 @@ public class StoryData {
         return new File(Environment.getExternalStorageDirectory() + "/mysterious/stories", fileName);
     }
 
+    @Override
+    public int compareTo(@NonNull StoryData o) {
+        return o.dayOfYear - dayOfYear;
+    }
+
+    @Override
+    public String toString() {
+        return "fileName=" + fileName + "\n"
+                + "dayOfYear=" + dayOfYear + "\n"
+                + "isAvailable=" + isAvailable() + "\n"
+                + "isLoading=" + isLoading + "\n"
+                + "failure=" + failure + "\n"
+                + "remainingMillis=" + getRemainingMillis() + "\n";
+    }
 }
