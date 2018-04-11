@@ -2,16 +2,18 @@ package com.darin.mysterious;
 
 import android.Manifest;
 import android.app.Application;
+import android.app.DownloadManager;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.darin.mysterious.data.StoryData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,12 +40,16 @@ public class Mysterious extends Application {
     private List<OnLoadListener> loadListeners;
     private boolean isLoaded;
 
+    private DownloadManager downloadManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         loadListeners = new ArrayList<>();
         reload();
+
+        downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
     }
 
     public void reload() {
@@ -88,7 +94,17 @@ public class Mysterious extends Application {
     }
 
     public void downloadStories(List<StoryData> stories) {
+        for (StoryData story : stories) {
+            File file = story.getFile();
 
+            downloadManager.enqueue(new DownloadManager.Request(Uri.parse(story.getUrl(URL_STORIES_BASE)))
+                    .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                    .setAllowedOverRoaming(false)
+                    .setDescription("Downloading Story " + story.getDate())
+                    .setTitle("Downloading Story")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                    .setDestinationInExternalPublicDir(file.getParentFile().getAbsolutePath(), file.getName()));
+        }
     }
 
     public long millisUntilNextStory() {
@@ -105,8 +121,6 @@ public class Mysterious extends Application {
                     index = i;
             }
         }
-
-        Log.d("RemainingMillis", index + " - \n" + storiesThread.stories.get(index));
 
         if (index >= 0)
             return storiesThread.stories.get(index).getRemainingMillis();

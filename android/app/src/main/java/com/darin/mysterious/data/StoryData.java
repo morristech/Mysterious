@@ -49,6 +49,8 @@ public class StoryData implements Comparable<StoryData> {
     public String getDate() {
         Calendar now = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(0);
+        calendar.set(Calendar.YEAR, now.get(Calendar.YEAR));
         calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
         while (!calendar.before(now)) {
             calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1);
@@ -105,6 +107,10 @@ public class StoryData implements Comparable<StoryData> {
 
     public File getFile() {
         return new File(Environment.getExternalStorageDirectory() + "/mysterious/stories", fileName);
+    }
+
+    public String getUrl(String prefix) {
+        return prefix + fileName;
     }
 
     @Override
